@@ -17,3 +17,4 @@ A custom, from-scratch 3D pseudo-raycasting game engine built to explore low-lev
 
 ## High thanks too:
 **StanislavPetrovV** for explained perfectly how to engine works, he taught me alot of things.
+https://github.com/StanislavPetrovV
