@@ -7,7 +7,7 @@ A custom, from-scratch 3D pseudo-raycasting game engine built to explore low-lev
 **Performance Optimization**.
 
 ## The Math Behind the Engine
-**Trigonometry**.
+*Trigonometry*.
 **Linear Algebra**.
 **Geometric Proportions**.
 
@@ -20,4 +20,4 @@ A custom, from-scratch 3D pseudo-raycasting game engine built to explore low-lev
 https://github.com/StanislavPetrovV
 
 ## Current Limitation (Work in Progress)
-* **File Paths:** The asset and sound paths are currently hardcoded to my local machine.
+* **File Paths:** The asset and sound paths are currently hardcoded to my local machine.FIXED(I hope)
