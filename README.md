@@ -1,19 +1,26 @@
 A custom, from-scratch 3D pseudo-raycasting game engine built to explore low-level graphics rendering, discrete mathematics, and game loop architecture without relying on modern 3D graphics libraries.
 
 ## Features:
-**From-Scratch Rendering**.
+**RAY CASTING**.
 <br>
-**Custom Mathematics**.
-**Fish-Eye Correction**.
-**Performance Optimization**.
+**MOVEMENT(KEYBOARD/MOUSE)**.
+<br>
+**SHOOTING**.
+<br>
+**MENU(START/QUIT)**.
+<br>
+**RENDER OBJECTS(ANIMATED/BASIC)**.
 
 ## The Math Behind the Engine
 **Trigonometry**.
+<br>
 **Linear Algebra**.
+<br>
 **Geometric Proportions**.
 
 ## Built With:
 **python**
+<br>
 **core library** pygame
 
 ## High thanks too:
