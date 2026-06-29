@@ -51,11 +51,21 @@ class Player:
         self.try_move(dx, dy)
 
     def commandShot(self, event):
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                if not self.shot:
-                    print("shoot")
-                    self.shot = True
+        cmdShot = pygame.mouse.get_pressed()
+        if not self.shot and cmdShot[0] and not self.game.curr_wpn.reload:
+            #debug
+            # print("shoot")
+            self.shot = True
+
+    def changeWeapons(self, event):
+        if event.key == pygame.K_1:
+            self.game.curr_wpn = self.game.wpns['1']
+            #for debug
+            # print("key pressed")
+        if event.key == pygame.K_2:
+            self.game.curr_wpn = self.game.wpns['2']
+            #for debug
+            # print("key pressed") 
 
     def mouse_movement(self):
         self.mouse_x = pygame.mouse.get_rel()[0]

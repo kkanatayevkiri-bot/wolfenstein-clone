@@ -31,9 +31,7 @@ class ObjectsAnimated(Objects):
             l.append(img)
         return l
 
-    def update(self): #here its better to be an parameter cuz we
-        #will have alot of animations for one object that we will
-        #switch between
+    def update(self):
         super().update()
         self.check_animation_time()
         self.switch_img(self.l_imgs)

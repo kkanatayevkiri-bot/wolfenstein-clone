@@ -22,12 +22,14 @@ class Game:
         self.rays = Raycasting(self)
         self.object = Objects(self)
         self.aniObject = ObjectsAnimated(self)
-        self.wp = Weapons(self)
+        self.wpns = {'1':Weapons(self), '2':MachineGun(self)}
+        self.curr_wpn = self.wpns['2']
 
     def input(self,event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 self.done = True
+            self.player.changeWeapons(event)
         self.player.commandShot(event)
 
     def update(self):
@@ -35,11 +37,11 @@ class Game:
         self.rays.update()
         self.object.update()
         self.aniObject.update()
-        self.wp.update()
+        self.curr_wpn.update()
 
     def draw(self):
         self.engine.window.fill((0,0,0))
         self.object_renderer.draw()
-        self.wp.draw(self.engine.window)
+        self.curr_wpn.draw(self.engine.window)
         # self.map.draw()
         # self.player.draw()

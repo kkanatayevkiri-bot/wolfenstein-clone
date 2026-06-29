@@ -1,13 +1,15 @@
 from settings import*
 import pygame
+import os
 
 class Objectrenderer:
     def __init__(self, game):
+        self.basePath = os.path.dirname(os.path.abspath(__file__))
         self.game = game
         self.screen = game.engine.window
         self.walls = self.load_wall_textures()
         self.ground = (92, 64, 51)
-        self.sky = pygame.image.load('/home/kirill/code/python/games/tests/textures/background/skyBG.webp').convert_alpha()
+        self.sky = pygame.image.load(os.path.join(self.basePath ,'textures/background/skyBG.webp')).convert_alpha()
         self.sky = pygame.transform.scale(self.sky,(X,HALF_Y))
 
     def draw(self):

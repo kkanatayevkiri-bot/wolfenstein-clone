@@ -15,18 +15,18 @@ class Weapons(ObjectsAnimated):
         self.reload = False
 
     def commandReload(self):
-        if self.game.player.shot:
+        if self.game.player.shot and not self.reload:
             self.reload = True
             self.game.player.shot = False
 
-        if self.reload and self.curr_i < self.imgs_len and self.animation_trigger:
-            self.curr_i+=1
+        if self.reload and self.animation_trigger:
             self.l_imgs.rotate(-1)
             self.image = self.l_imgs[0]
+            self.curr_i+=1
 
-        if self.curr_i == self.imgs_len:
-            self.curr_i = 0
-            self.reload = False
+            if self.curr_i == self.imgs_len:
+                self.curr_i = 0
+                self.reload = False
 
     def update(self):
         self.check_animation_time()
@@ -34,3 +34,8 @@ class Weapons(ObjectsAnimated):
 
     def draw(self, screen):
         screen.blit(self.image, self.pos)
+
+
+class MachineGun(Weapons):
+    def __init__(self, game, path="/textures/machineGun/0.png" ,animation_time=60, scale=3):
+        super().__init__(game=game, path=path, scale=scale, animation_time=animation_time)
