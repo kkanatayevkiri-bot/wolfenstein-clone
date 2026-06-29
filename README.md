@@ -10,13 +10,15 @@ A custom, from-scratch 3D pseudo-raycasting game engine built to explore low-lev
 **MENU(START/QUIT)**.
 <br>
 **RENDER OBJECTS(ANIMATED/BASIC)**.
+<br>
+**MULTIPLE WEAPONS**
 
 ## The Math Behind the Engine
 **Trigonometry**.
 <br>
 **Linear Algebra**.
 <br>
-**Geometric Proportions**.
+**GEOMETRY**.
 
 ## Built With:
 **python**
@@ -24,7 +26,8 @@ A custom, from-scratch 3D pseudo-raycasting game engine built to explore low-lev
 **core library** pygame
 
 ## High thanks too:
-**StanislavPetrovV**. for explained perfectly how to engine works, he taught me alot of things.
+**StanislavPetrovV**. for explaining perfectly how to engine works and the math behind it, he taught me alot of things.
+visit his GitHun:
 https://github.com/StanislavPetrovV
 
 ## Current Limitation (Work in Progress)
