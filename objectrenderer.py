@@ -28,7 +28,7 @@ class Objectrenderer:
         return pygame.transform.scale(texture, size)
 
     def load_wall_textures(self):
-        return {1:self.get_texture('/home/kirill/code/python/games/tests/textures/walls/0.png')}
+        return {1:self.get_texture(os.path.join(self.basePath,'textures/walls/0.png'))}
 
     def render_walls(self):
         walls = self.game.rays.wall_results

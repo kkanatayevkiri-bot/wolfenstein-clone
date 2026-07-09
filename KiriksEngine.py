@@ -29,8 +29,7 @@ class Engine:
     def draw(self):
         self.statemanager.state.draw() #because the fill already in that function!
         pygame.display.flip()
-        
-
+         
     def run(self):
         while self.running:
             self.update()

@@ -6,6 +6,8 @@ from objectrenderer import *
 from objects import *
 from objectsAnimated import *
 from weapons import *
+from npc import *
+from dfs import *
 
 class Game:
     def __init__(self,engine):
@@ -22,8 +24,10 @@ class Game:
         self.rays = Raycasting(self)
         self.object = Objects(self)
         self.aniObject = ObjectsAnimated(self)
+        self.enemy = Npc(self)
         self.wpns = {'1':Weapons(self), '2':MachineGun(self)}
         self.curr_wpn = self.wpns['2']
+        self.path = FindPath(self)
 
     def input(self,event):
         if event.type == pygame.KEYDOWN:
@@ -37,6 +41,7 @@ class Game:
         self.rays.update()
         self.object.update()
         self.aniObject.update()
+        self.enemy.update()
         self.curr_wpn.update()
 
     def draw(self):

@@ -18,14 +18,14 @@ class Objects:
     def render(self):
         px, py  = self.game.player.player_pos
         dx ,dy = self.x - px , self.y - py
-        theta = atan2(dy ,dx)
-        delta = theta - self.game.player.PLAYER_A
+        self.theta = atan2(dy ,dx)
+        self.delta = self.theta - self.game.player.PLAYER_A
         if (dx > 0 and self.game.player.PLAYER_A > pi) or (dx < 0 and dy < 0):
-            delta += tau
+            self.delta += tau
 
-        del_rays = delta / DEL_RAY
+        del_rays = self.delta / DEL_RAY
         self.dist = hypot(dx, dy)
-        self.dist *= cos(delta)
+        self.dist *= cos(self.delta)
         self.x_screen = (HALF_NUM_RAYS + del_rays) * SCALE
         if -self.half_w < self.x_screen < (X+self.half_w):
             self.show()
