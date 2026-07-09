@@ -12,6 +12,8 @@ A custom, from-scratch 3D pseudo-raycasting game engine built to explore low-lev
 **RENDER OBJECTS(ANIMATED/BASIC)**.
 <br>
 **MULTIPLE WEAPONS**
+<br>
+**NPC**
 
 ## The Math Behind the Engine
 **Trigonometry**.
