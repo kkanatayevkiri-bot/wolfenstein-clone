@@ -25,9 +25,9 @@ class Game:
         self.object = Objects(self)
         self.aniObject = ObjectsAnimated(self)
         self.enemy = Npc(self)
+        self.path = FindPath(self)
         self.wpns = {'1':Weapons(self), '2':MachineGun(self)}
         self.curr_wpn = self.wpns['2']
-        self.path = FindPath(self)
 
     def input(self,event):
         if event.type == pygame.KEYDOWN:

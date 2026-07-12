@@ -32,10 +32,10 @@ class Objects:
 
     def show(self):
         obj_h = DISTANCE / self.dist * self.scale
-        obj_w = obj_h * self.ratio
-        img = pygame.transform.scale(self.image,(obj_w,obj_h))
+        self.obj_w = obj_h * self.ratio
+        img = pygame.transform.scale(self.image,(self.obj_w,obj_h))
         height_shift = obj_h * self.offset
-        pos = self.x_screen - obj_w // 2, HALF_Y - obj_h // 2 + height_shift
+        pos = self.x_screen - self.obj_w // 2, HALF_Y - obj_h // 2 + height_shift
         self.game.rays.wall_results.append((img, pos, self.dist))
 
     def update(self):

@@ -1,26 +1,29 @@
 import pygame
 
-MAP = [[1,1,1,1,1,1,1,1],
+MAP = [
+    [1,1,1,1,1,1,1,1],
     [1,0,0,0,0,0,0,1],
     [1,0,0,0,0,0,0,1],
     [1,0,0,1,1,0,0,1],
     [1,0,0,1,1,0,0,1],
     [1,0,0,0,0,0,0,1],
     [1,0,0,0,0,0,0,1],
-    [1,1,1,1,1,1,1,1],]
+    [1,1,1,1,1,1,1,1]
+    ]
 
 class Map:
     def __init__(self, engine):
         self.engine = engine
         self.map = MAP
-        self.walls = {}
-        self.find_walls()
+        self.walls = self.find_walls()
 
     def find_walls(self):
-        for y,row in enumerate(self.map):
+        d = {}
+        for y, row in enumerate(self.map):
             for x, col in enumerate(row):
-                if col:
-                    self.walls[(y,x)] = col
+                if self.map[y][x]:
+                    d[(x, y)] = 1
+        return d
 
     # def draw(self):
     #     for x,y in self.walls:

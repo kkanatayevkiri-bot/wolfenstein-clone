@@ -7,12 +7,22 @@ class Npc(ObjectsAnimated):
     def __init__(self,game , pos=(3.5,1.5) ,path='/textures/enemy/base/0.png' ,animation_time=120 , offset=0.27, scale=0.5):
         super().__init__(game, pos, path, animation_time, offset, scale)
         self.idle = self.createImages(self.basePath+'/textures/enemy/idleAni/0.png')
+        self.walk = self.createImages(self.basePath+'/textures/enemy/walkAni/0.png')
         self.search = False
         self.speed = 0.01
+        self.pain=False
 
     @property
     def npcPos(self):
         return (int(self.x), int(self.y))
+
+    def animatePain(self):
+        self.switch_img()
+        self.pain = False
+
+    def checkHit(self):
+        if HALF_X-self.half_w<self.x_screen<HALF_X+self.half_w and self.game.player.shot:
+            self.pain = True
 
     #fix movement!
     def npcMovement(self):
@@ -31,7 +41,7 @@ class Npc(ObjectsAnimated):
             self.x += tryX
 
     def checkWall(self, x, y):
-        if not (x, y) in self.game.map.walls:
+        if not (int(x), int(y)) in self.game.map.walls:
             return True
         return False
 
@@ -104,8 +114,13 @@ class Npc(ObjectsAnimated):
         self.npcLogic()
 
     def npcLogic(self):
-        if self.npcRay():
+        seePlayer = self.npcRay()
+        if seePlayer:
             self.search = True
             self.npcMovement()
+            self.switch_img(self.walk)
+        elif self.search :
+            self.npcMovement()
+            self.switch_img(self.walk)
         else:
             self.switch_img(self.idle)

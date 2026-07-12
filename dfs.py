@@ -5,34 +5,33 @@ class FindPath:
         #  MAP, self.map.walls
         self.game = game
         self.m = self.game.map.map
-        self.walls = self.game.map.walls
-
-        self.graph = self.creatGraph(self.m)
+        self.moves = [(1,0),(-1,0),(0,1),(0,-1),(1,-1),(1,1),(-1,-1),(-1,1)]
+        # self.moves = [(1,0),(-1,0),(0,1),(0,-1)]
+        self.graph = self.creatGraph()
+        # print((3,4) in self.game.map.walls)
 
     #Graph creation
-    def graphMoves(self, r, c):
-        moves = [(1,0),(-1,0),(0,1),(0,-1),(1,-1),(1,1),(-1,-1),(-1,1)]
-        return [(r+dx, c+dy) for dx, dy in moves if (r+dx, c+dy) not in self.walls]
+    def graphMoves(self, x, y):
+        return [(x+dx, y+dy) for dx, dy in self.moves if (x+dx, y+dy) not in self.game.map.walls]
 
-    def creatGraph(self, m):
+    def creatGraph(self):
         d = {}
-        for row in range(len(m)):
-            for col in range(len(m[row])):
-                if m[row][col] == 0:
-                    d[(row,col)] = self.graphMoves(row, col)
-
+        for y, row in enumerate(self.m):
+            for x, col in enumerate(row):
+                if col==0:
+                    d[(x,y)] = self.graphMoves(x,y)
         return d
 
-    def creatPath(self, curr_pos, player):
-        if curr_pos == player:
-            return curr_pos
+    def creatPath(self, npc, player):
+        if npc == player:
+            return npc
 
         visited = set()
         queu = deque()
         path = {}
 
-        visited.add(curr_pos)
-        queu.append(curr_pos)
+        visited.add(npc)
+        queu.append(npc)
 
         while queu:
             curr_node = queu.popleft()
@@ -47,9 +46,10 @@ class FindPath:
         #fix path
         fixed_path = []
         curr = player
-        while curr != curr_pos:
+        while curr != npc:
             fixed_path.append(curr)
             curr = path[curr]
+        fixed_path.reverse()
         return fixed_path[0]
 
         
