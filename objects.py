@@ -31,7 +31,7 @@ class Objects:
             self.show()
 
     def show(self):
-        obj_h = DISTANCE / self.dist * self.scale
+        obj_h = (DISTANCE / self.dist) * self.scale
         self.obj_w = obj_h * self.ratio
         img = pygame.transform.scale(self.image,(self.obj_w,obj_h))
         height_shift = obj_h * self.offset

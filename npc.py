@@ -1,4 +1,5 @@
 import pygame
+import random
 from objectsAnimated import *
 from settings import *
 from math import cos, sin, atan2
@@ -8,21 +9,42 @@ class Npc(ObjectsAnimated):
         super().__init__(game, pos, path, animation_time, offset, scale)
         self.idle = self.createImages(self.basePath+'/textures/enemy/idleAni/0.png')
         self.walk = self.createImages(self.basePath+'/textures/enemy/walkAni/0.png')
-        self.search = False
+        self.death = self.createImages(self.basePath+'/textures/enemy/deathAni/0.png')
+        self.painAni = self.createImages(self.basePath+'/textures/enemy/painAni/0.png')
         self.speed = 0.01
+        self.hp = 50
+        self.atkDis = random.randint(2,3)
+
+        self.search = False
         self.pain=False
+        self.alive = True
+        self.lineOfSight = False
 
     @property
     def npcPos(self):
         return (int(self.x), int(self.y))
 
+    def deathAnimation(self):
+        maxImgs = len(self.l_imgs)
+        curr_i = 0
+        if curr_i < maxImgs and self.animation_trigger:
+            self.image = self.l_imgs[curr_i]
+            curr_i+=1
+
+    def checkDeath(self):
+        if (self.hp <= self.game.curr_wpn.dmg):
+            self.alive = False
+        self.hp -= self.game.curr_wpn.dmg
+
     def animatePain(self):
-        self.switch_img()
-        self.pain = False
+        self.switch_img(self.painAni)
+        if self.animation_trigger:
+            self.pain = False
 
     def checkHit(self):
-        if HALF_X-self.half_w<self.x_screen<HALF_X+self.half_w and self.game.player.shot:
-            self.pain = True
+        if HALF_X-self.half_w<self.x_screen<HALF_X+self.half_w and self.game.player.shot == True and self.lineOfSight:
+            return True
+        return False
 
     #fix movement!
     def npcMovement(self):
@@ -114,13 +136,18 @@ class Npc(ObjectsAnimated):
         self.npcLogic()
 
     def npcLogic(self):
-        seePlayer = self.npcRay()
-        if seePlayer:
-            self.search = True
-            self.npcMovement()
-            self.switch_img(self.walk)
-        elif self.search :
-            self.npcMovement()
-            self.switch_img(self.walk)
-        else:
-            self.switch_img(self.idle)
+        if self.alive:
+            self.lineOfSight = self.npcRay()
+            if self.checkHit():
+                self.pain = True
+            if self.pain:
+                self.animatePain()
+            elif self.lineOfSight:
+                self.search = True
+                self.npcMovement()
+                self.switch_img(self.walk)
+            elif self.search:
+                self.npcMovement()
+                self.switch_img(self.walk)
+            else:
+                self.switch_img(self.idle)
