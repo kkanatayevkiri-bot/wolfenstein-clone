@@ -11,6 +11,7 @@ class Npc(ObjectsAnimated):
         self.walk = self.createImages(self.basePath+'/textures/enemy/walkAni/0.png')
         self.death = self.createImages(self.basePath+'/textures/enemy/deathAni/0.png')
         self.painAni = self.createImages(self.basePath+'/textures/enemy/painAni/0.png')
+        self.atk = self.createImages(self.basePath+'/textures/enemy/atkAni/0.png')
         self.speed = 0.01
         self.hp = 50
         self.atkDis = random.randint(2,3)
@@ -19,22 +20,23 @@ class Npc(ObjectsAnimated):
         self.pain=False
         self.alive = True
         self.lineOfSight = False
+        self.frame_cnt = 0
 
     @property
     def npcPos(self):
         return (int(self.x), int(self.y))
 
     def deathAnimation(self):
-        maxImgs = len(self.l_imgs)
-        curr_i = 0
-        if curr_i < maxImgs and self.animation_trigger:
-            self.image = self.l_imgs[curr_i]
-            curr_i+=1
+        if not self.alive:
+            if self.animation_trigger and self.frame_cnt <= len(self.death)-1:
+                self.image = self.death[0]
+                self.death.rotate(-1)
+                self.frame_cnt+=1
 
     def checkDeath(self):
-        if (self.hp <= self.game.curr_wpn.dmg):
-            self.alive = False
         self.hp -= self.game.curr_wpn.dmg
+        if self.hp <= 0:
+            self.alive = False
 
     def animatePain(self):
         self.switch_img(self.painAni)
@@ -142,12 +144,18 @@ class Npc(ObjectsAnimated):
                 self.pain = True
             if self.pain:
                 self.animatePain()
+                self.checkDeath()
             elif self.lineOfSight:
                 self.search = True
-                self.npcMovement()
-                self.switch_img(self.walk)
+                if int(self.dist) <= self.atkDis:
+                    self.switch_img(self.atk)
+                else:
+                    self.npcMovement()
+                    self.switch_img(self.walk)
             elif self.search:
                 self.npcMovement()
                 self.switch_img(self.walk)
             else:
                 self.switch_img(self.idle)
+        else:
+            self.deathAnimation()
