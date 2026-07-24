@@ -3,10 +3,8 @@ from map import *
 from player import *
 from raycast import *
 from objectrenderer import *
-from objects import *
-from objectsAnimated import *
+from objectHandler import *
 from weapons import *
-from npc import *
 from dfs import *
 
 class Game:
@@ -22,10 +20,8 @@ class Game:
         self.player = Player(self, self.engine)
         self.object_renderer = Objectrenderer(self)
         self.rays = Raycasting(self)
-        self.object = Objects(self)
-        self.aniObject = ObjectsAnimated(self)
-        self.enemy = Npc(self)
         self.path = FindPath(self)
+        self.object_handeler = ObjectHandeler(self)
         self.wpns = {'1':Weapons(self), '2':MachineGun(self)}
         self.curr_wpn = self.wpns['2']
 
@@ -39,14 +35,10 @@ class Game:
     def update(self):
         self.player.update()
         self.rays.update()
-        self.object.update()
-        self.aniObject.update()
-        self.enemy.update()
+        self.object_handeler.update()
         self.curr_wpn.update()
 
     def draw(self):
         self.engine.window.fill((0,0,0))
         self.object_renderer.draw()
         self.curr_wpn.draw(self.engine.window)
-        # self.map.draw()
-        # self.player.draw()

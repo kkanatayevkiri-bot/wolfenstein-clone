@@ -13,7 +13,7 @@ class Weapons(ObjectsAnimated):
         self.imgs_len = len(self.l_imgs)
         self.curr_i = 0
         self.reload = False
-        self.dmg = 50
+        self.wpDmg = 50
 
     def commandReload(self):
         if self.game.player.shot and not self.reload:
@@ -40,4 +40,4 @@ class Weapons(ObjectsAnimated):
 class MachineGun(Weapons):
     def __init__(self, game, path="/textures/machineGun/0.png" ,animation_time=60, scale=3):
         super().__init__(game=game, path=path, scale=scale, animation_time=animation_time)
-        self.dmg = 25
+        self.wpDmg = 15

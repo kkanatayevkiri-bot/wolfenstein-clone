@@ -2,13 +2,10 @@ from collections import deque
 
 class FindPath:
     def __init__(self, game):
-        #  MAP, self.map.walls
         self.game = game
         self.m = self.game.map.map
         self.moves = [(1,0),(-1,0),(0,1),(0,-1),(1,-1),(1,1),(-1,-1),(-1,1)]
-        # self.moves = [(1,0),(-1,0),(0,1),(0,-1)]
         self.graph = self.creatGraph()
-        # print((3,4) in self.game.map.walls)
 
     #Graph creation
     def graphMoves(self, x, y):
@@ -30,6 +27,8 @@ class FindPath:
         queu = deque()
         path = {}
 
+        for pos in self.game.object_handeler.npcPositions:
+            visited.add(pos)
         visited.add(npc)
         queu.append(npc)
 
@@ -42,6 +41,10 @@ class FindPath:
                     path[node] = curr_node
                     visited.add(node)
                     queu.append(node)
+
+        if player not in path:
+            path.reverse()
+            return path[-1]
 
         #fix path
         fixed_path = []

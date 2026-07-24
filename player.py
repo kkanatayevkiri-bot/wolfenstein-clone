@@ -11,6 +11,7 @@ class Player:
         self.PLAYER_A = 0
         self.X, self.Y = 2.5,1.5
         self.body = 0.5
+        self.playerHp = 100
         self.shot = False
 
     @property

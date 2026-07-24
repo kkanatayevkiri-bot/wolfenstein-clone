@@ -13,14 +13,22 @@ class Npc(ObjectsAnimated):
         self.painAni = self.createImages(self.basePath+'/textures/enemy/painAni/0.png')
         self.atk = self.createImages(self.basePath+'/textures/enemy/atkAni/0.png')
         self.speed = 0.01
-        self.hp = 50
+        self.npcDmg = 10
+        self.npcHp = 80
         self.atkDis = random.randint(2,3)
+        self.acc = 0.1
 
         self.search = False
         self.pain=False
         self.alive = True
         self.lineOfSight = False
         self.frame_cnt = 0
+
+    def attackPlayer(self):
+        if self.animation_trigger:
+            if self.acc > random.random():
+                self.game.player.playerHp -= self.npcDmg
+                print(self.game.player.playerHp)
 
     @property
     def npcPos(self):
@@ -34,13 +42,14 @@ class Npc(ObjectsAnimated):
                 self.frame_cnt+=1
 
     def checkDeath(self):
-        self.hp -= self.game.curr_wpn.dmg
-        if self.hp <= 0:
+        self.npcHp -= self.game.curr_wpn.wpDmg
+        if self.npcHp <= 0:
             self.alive = False
 
     def animatePain(self):
         self.switch_img(self.painAni)
         if self.animation_trigger:
+            self.checkDeath()
             self.pain = False
 
     def checkHit(self):
@@ -68,6 +77,9 @@ class Npc(ObjectsAnimated):
         if not (int(x), int(y)) in self.game.map.walls:
             return True
         return False
+
+    def checkNpcCollosion(self):
+        pass
 
     def npcRay(self):
         if self.game.player.player_pos_map == (int(self.x), int(self.y)):
@@ -144,11 +156,11 @@ class Npc(ObjectsAnimated):
                 self.pain = True
             if self.pain:
                 self.animatePain()
-                self.checkDeath()
             elif self.lineOfSight:
                 self.search = True
                 if int(self.dist) <= self.atkDis:
                     self.switch_img(self.atk)
+                    self.attackPlayer()
                 else:
                     self.npcMovement()
                     self.switch_img(self.walk)

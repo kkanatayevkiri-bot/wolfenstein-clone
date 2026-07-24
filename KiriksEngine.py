@@ -1,5 +1,6 @@
 import pygame
 import sys
+import os
 from settings import *
 from stateManager import *
 
@@ -27,7 +28,7 @@ class Engine:
         pygame.display.set_caption(f'{self.clock.get_fps() :.1f}') #regular f string with attribute and method
 
     def draw(self):
-        self.statemanager.state.draw() #because the fill already in that function!
+        self.statemanager.state.draw() #because the fill already in wwdwthat function!
         pygame.display.flip()
          
     def run(self):
@@ -38,5 +39,6 @@ class Engine:
 if __name__ == "__main__":
     engine = Engine()
     engine.run()
-pygame.quit()
-sys.exit()
+    pygame.quit()
+    sys.exit()
+    os.system("clear")
