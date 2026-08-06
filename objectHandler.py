@@ -12,8 +12,8 @@ class ObjectHandeler:
         addNpc = self.addNpc
         addObjs = self.addObjs
 
-        addNpc(Npc(game))
-        addNpc(Npc(game, pos=(1.5,4.5)))
+        addNpc(Npc(game, pos=(6.5,8.5)))
+        addNpc(Npc(game, pos=(6.5,1.5)))
 
         addObjs(Objects(game))
         addObjs(ObjectsAnimated(game))

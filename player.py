@@ -89,5 +89,5 @@ class Player:
         self.key_board()
         self.mouse_movement()
 
-    def draw(self):
-        pygame.draw.circle(self.engine.window,(255,0,0),(self.X*100,self.Y*100), 15)
+    # def draw(self):
+        # pygame.draw.circle(self.engine.window,(255,0,0),(self.X*100,self.Y*100), 15)

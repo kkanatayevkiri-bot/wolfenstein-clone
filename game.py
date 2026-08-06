@@ -15,7 +15,13 @@ class Game:
         self.curr = "game"
         self.new_game()
 
+    def checkDeath(self):
+        if self.player.playerHp <= 0:
+            self.next = "gameover"
+            self.done = True
+
     def new_game(self):
+        self.next = "menu"
         self.map = Map(self.engine)
         self.player = Player(self, self.engine)
         self.object_renderer = Objectrenderer(self)
@@ -37,6 +43,7 @@ class Game:
         self.rays.update()
         self.object_handeler.update()
         self.curr_wpn.update()
+        self.checkDeath()
 
     def draw(self):
         self.engine.window.fill((0,0,0))
