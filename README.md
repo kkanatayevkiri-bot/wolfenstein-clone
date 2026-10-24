@@ -1,36 +1,24 @@
+# Retro Raycaster Engine
+
 A custom, from-scratch 3D pseudo-raycasting game engine built to explore low-level graphics rendering, discrete mathematics, and game loop architecture without relying on modern 3D graphics libraries.
 
-## Features:
-**RAY CASTING**.
-<br>
-**MOVEMENT(KEYBOARD/MOUSE)**.
-<br>
-**SHOOTING**.
-<br>
-**MENU(START/QUIT)**.
-<br>
-**RENDER OBJECTS(ANIMATED/BASIC)**.
-<br>
-**MULTIPLE WEAPONS**
-<br>
-**NPC**
+## Features
+* Ray casting rendering loop
+* Full keyboard and mouse movement
+* Shooting mechanics & multiple weapons
+* Interactive start/quit menu
+* Basic and animated NPC rendering
 
 ## The Math Behind the Engine
-**Trigonometry**.
-<br>
-**Linear Algebra**.
-<br>
-**GEOMETRY**.
+* Trigonometry (camera projection and angles)
+* Linear algebra & geometry (ray-wall intersections)
 
-## Built With:
-**python**
-<br>
-**core library** pygame
+## Built With
+* Python
+* Pygame (core library)
 
-## High thanks too:
-**StanislavPetrovV**. for explaining perfectly how to engine works and the math behind it, he taught me alot of things.
-visit his GitHun:
-https://github.com/StanislavPetrovV
+## Acknowledgments
+Huge thanks to **StanislavPetrovV** for explaining the engine architecture and math so clearly. Check out his work: [GitHub Profile](https://github.com/StanislavPetrovV)
 
-## Current Limitation (Work in Progress)
-* **File Paths:** The asset and sound paths are currently hardcoded to my local machine.FIXED(I hope)
+## Current Status
+* **File Paths:** Asset paths mapped for cross-platform compatibility. *(FIXED... I hope)*
