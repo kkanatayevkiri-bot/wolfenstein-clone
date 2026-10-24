@@ -1,9 +1,11 @@
 from npc import *
 from objects import *
 from objectsAnimated import *
+import pygame
 
 class ObjectHandeler:
-    def __init__(self, game):
+    def __init__(self, game, engine):
+        self.engine = engine
         self.game = game
 
         self.npcLis = []
@@ -18,6 +20,15 @@ class ObjectHandeler:
         addObjs(Objects(game))
         addObjs(ObjectsAnimated(game))
 
+        self.last_ticks = pygame.time.get_ticks()
+
+    def removeDead(self):
+        curr = pygame.time.get_ticks()
+        if curr - self.last_ticks >= 5000:
+            self.last_ticks = curr
+            return True
+        return False
+
     def findNpcPos(self):
         self.npcPositions = [npc.npcPos for npc in self.npcLis]
 
@@ -29,5 +40,7 @@ class ObjectHandeler:
 
     def update(self):
         [npc.update() for npc in self.npcLis]
+        if self.removeDead():
+            self.npcLis = [npc for npc in self.npcLis if npc.alive]
         # self.findNpcPos()
         [obj.update() for obj in self.objectsLis]

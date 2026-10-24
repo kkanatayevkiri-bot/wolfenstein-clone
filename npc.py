@@ -13,9 +13,9 @@ class Npc(ObjectsAnimated):
         self.painAni = self.createImages(self.basePath+'/textures/enemy/painAni/0.png')
         self.atk = self.createImages(self.basePath+'/textures/enemy/atkAni/0.png')
         self.speed = 0.01
-        self.npcDmg = 25
-        self.npcHp = 80
-        self.atkDis = random.randint(2,3)
+        self.npcDmg = 10
+        self.npcHp = 50
+        self.atkDis = random.randint(1,2)
         self.acc = 0.1
 
         self.search = False

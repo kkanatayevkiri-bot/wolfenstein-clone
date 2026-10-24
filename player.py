@@ -13,6 +13,9 @@ class Player:
         self.body = 0.5
         self.playerHp = 100
         self.shot = False
+        pygame.event.set_grab(True)
+        
+        self.wpA = 0
 
     @property
     def player_pos_map(self):
@@ -31,6 +34,14 @@ class Player:
 
         dx, dy = 0, 0
         keys = pygame.key.get_pressed()
+
+        if any(keys):
+            self.game.curr_wpn.y += 1*sin(self.wpA)
+            self.wpA+=0.1
+        else:
+            self.game.curr_wpn.y = self.game.curr_wpn.ogY
+            self.wpA=0
+
         if keys[pygame.K_w]:
             dx += cos_spd
             dy += sin_spd
@@ -70,9 +81,14 @@ class Player:
 
     def mouse_movement(self):
         self.mouse_x = pygame.mouse.get_rel()[0]
-        self.mouse = self.mouse_x * SENSITIVITY * self.engine.del_time
+        self.mouse = self.mouse_x * SENSITIVITY
         self.PLAYER_A += self.mouse
         self.PLAYER_A %= tau
+
+    def returnMouse(self):
+        mouseX, mouseY = pygame.mouse.get_pos()
+        if mouseX <= 0 or mouseX >= X:
+            pygame.mouse.set_pos((X//2, mouseY))
 
     def try_move(self, dx, dy):
         scale = 10
@@ -88,6 +104,7 @@ class Player:
     def update(self):
         self.key_board()
         self.mouse_movement()
+        self.returnMouse()
 
     # def draw(self):
         # pygame.draw.circle(self.engine.window,(255,0,0),(self.X*100,self.Y*100), 15)

@@ -2,7 +2,8 @@ import pygame
 from button import *
 
 class Menu:
-    def __init__(self,engine):
+    def __init__(self,manager ,engine):
+        self.manager = manager
         self.engine = engine
         self.done = False
         self.next = "game"
@@ -10,7 +11,7 @@ class Menu:
         self.btns = []
         creat_btns = self.creat_btns
         creat_btns(Button(self.engine, (255,255,255), "Start",-200, "play"))
-        creat_btns(Button(self.engine, (255,255,255), "Settings",0, "settings"))
+        creat_btns(Button(self.engine, (255,255,255), "New Game",0, "newGame"))
         creat_btns(Button(self.engine, (255,255,255), "Quit",200, "quit"))
 
     def creat_btns(self, btn):
@@ -31,6 +32,10 @@ class Menu:
                     self.engine.running = 0
                 elif btn.action == "play":
                     self.done = True
+                elif btn.action == "newGame":
+                    self.manager.states["game"].new_game()
+                    self.done = True
+                    
 
     def update(self):pass
 

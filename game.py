@@ -11,14 +11,20 @@ class Game:
     def __init__(self,engine):
         self.engine = engine
         self.done = False
-        self.next = "menu"
+        self.next = "win"
         self.curr = "game"
         self.new_game()
 
-    def checkDeath(self):
+    def changeState(self):
+        if not self.object_handeler.npcLis:
+            self.next = "win"
+            self.done = True
+
+            return
         if self.player.playerHp <= 0:
             self.next = "gameover"
             self.done = True
+            return
 
     def new_game(self):
         self.next = "menu"
@@ -27,7 +33,7 @@ class Game:
         self.object_renderer = Objectrenderer(self)
         self.rays = Raycasting(self)
         self.path = FindPath(self)
-        self.object_handeler = ObjectHandeler(self)
+        self.object_handeler = ObjectHandeler(self, self.engine)
         self.wpns = {'1':Weapons(self), '2':MachineGun(self)}
         self.curr_wpn = self.wpns['2']
 
@@ -43,7 +49,7 @@ class Game:
         self.rays.update()
         self.object_handeler.update()
         self.curr_wpn.update()
-        self.checkDeath()
+        self.changeState()
 
     def draw(self):
         self.engine.window.fill((0,0,0))
