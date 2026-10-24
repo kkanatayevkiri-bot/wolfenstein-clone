@@ -22,3 +22,9 @@ Huge thanks to **StanislavPetrovV** for explaining the engine architecture and m
 
 ## Current Status
 * **File Paths:** Asset paths mapped for cross-platform compatibility. *(FIXED... I hope)*
+
+## Demo
+<video width="100%" autoplay loop muted playsinline>
+  <source src="/home/kirill/Videos/Kooha/shortV.webm" type="video/webm">
+  Your browser does not support the video tag.
+</video>
