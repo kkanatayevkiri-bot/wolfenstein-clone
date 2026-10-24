@@ -17,6 +17,6 @@ class StateManager:
     def next_state(self):
         if self.state.done:
             self.state.done = False
-            if self.state.curr == 'gameover':
+            if self.state.curr == 'gameover' or self.state.curr == 'win':
                 self.states['game'].new_game()
             self.state = self.states[self.state.next]
