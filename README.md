@@ -22,6 +22,3 @@ Huge thanks to **StanislavPetrovV** for explaining the engine architecture and m
 
 ## Current Status
 * **File Paths:** Asset paths mapped for cross-platform compatibility. *(FIXED... I hope)*
-
-## Demo
-[vid.webm](https://github.com/user-attachments/assets/3e0443be-58b8-4fb7-a9b9-1ae33980f619)
